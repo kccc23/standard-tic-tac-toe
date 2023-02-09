@@ -21,8 +21,19 @@ def game_over(board, i):
     print("GAME OVER")
     print(board[i], "has won")
     exit()
-
     return
+
+def is_row_winner(board, row_num):
+    if board[row_num] == board[row_num+1] and board[row_num+1] == board[row_num+2]:
+        return True
+    else:
+        return False
+
+def is_column_winner(board, column_num):
+    if board[column_num] == board[column_num+3] and board[column_num+3] == board[column_num+6]:
+        return True
+    else:
+        return False
 
 board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 current_player = "X"
@@ -33,17 +44,17 @@ for move_number in range(1, 10):
     space_number = int(response) - 1
     board[space_number] = current_player
 
-    if board[0] == board[1] and board[1] == board[2]:
+    if is_row_winner(board, 0):
         game_over(board, 0)
-    elif board[3] == board[4] and board[4] == board[5]:
+    elif is_row_winner(board, 3):
         game_over(board, 3)
-    elif board[6] == board[7] and board[7] == board[8]:
+    elif is_row_winner(board, 6):
         game_over(board, 6)
-    elif board[0] == board[3] and board[3] == board[6]:
+    elif is_column_winner(board, 0):
         game_over(board, 0)
-    elif board[1] == board[4] and board[4] == board[7]:
+    elif is_column_winner(board, 1):
         game_over(board, 1)
-    elif board[2] == board[5] and board[5] == board[8]:
+    elif is_column_winner(board, 2):
         game_over(board, 2)
     elif board[0] == board[4] and board[4] == board[8]:
         game_over(board, 0)
