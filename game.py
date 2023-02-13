@@ -35,6 +35,13 @@ def is_column_winner(board, column_num):
     else:
         return False
 
+def is_diagonal_winner(board, diagonal_num):
+    if diagonal_num == 0 and board[diagonal_num] == board[diagonal_num+4] == board[diagonal_num+8]:
+        return True
+    if diagonal_num == 2 and board[diagonal_num] == board[diagonal_num+2] == board[diagonal_num+4]:
+        return True
+    return False
+
 board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 current_player = "X"
 
@@ -56,9 +63,13 @@ for move_number in range(1, 10):
         game_over(board, 1)
     elif is_column_winner(board, 2):
         game_over(board, 2)
-    elif board[0] == board[4] and board[4] == board[8]:
+    # elif board[0] == board[4] and board[4] == board[8]:
+    #     game_over(board, 0)
+    # elif board[2] == board[4] and board[4] == board[6]:
+    #     game_over(board, 2)
+    elif is_diagonal_winner(board, 0):
         game_over(board, 0)
-    elif board[2] == board[4] and board[4] == board[6]:
+    elif is_diagonal_winner(board, 2):
         game_over(board, 2)
 
     if current_player == "X":
